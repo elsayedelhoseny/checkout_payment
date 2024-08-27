@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:payment/Features/checkout/presentation/views/payment_details.dart';
-import 'package:payment/Features/checkout/presentation/views/widgets/payment_info_item.dart';
+import 'package:payment/Features/checkout/presentation/views/widgets/cart_info_item.dart';
+import 'package:payment/Features/checkout/presentation/views/widgets/payment_methods_bottom_sheet.dart';
 import 'package:payment/Features/checkout/presentation/views/widgets/total_price_widget.dart';
 import 'package:payment/core/widgets/custom_button.dart';
 
@@ -20,21 +20,21 @@ class MyCartViewBody extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          const PaymentItemInfo(
+          const OrderInfoItem(
             title: 'Order Subtotal',
             value: r'42.97$',
           ),
           const SizedBox(
             height: 3,
           ),
-          const PaymentItemInfo(
+          const OrderInfoItem(
             title: 'Discount',
             value: r'0$',
           ),
           const SizedBox(
             height: 3,
           ),
-          const PaymentItemInfo(
+          const OrderInfoItem(
             title: 'Shipping',
             value: r'8$',
           ),
@@ -48,12 +48,20 @@ class MyCartViewBody extends StatelessWidget {
             height: 16,
           ),
           CustomButton(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const PaymentDetailsView();
-              }));
-            },
             text: 'Complete Payment',
+            onTap: () {
+              // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              //   return const PaymentDetailsView();
+              // }));
+
+              showModalBottomSheet(
+                  context: context,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                  builder: (context) {
+                    return const PaymentMethodsBottomSheet();
+                  });
+            },
           ),
           const SizedBox(
             height: 12,
